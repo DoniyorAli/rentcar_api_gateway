@@ -39,7 +39,7 @@ func (h *Handler) CreateBrand(ctx *gin.Context) {
 	})
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: err.Error("This is not working ---> h.grpcClients.Brand.CreateBrand"),
+			Error: "This is not working ---> CreateBrand",
 		})
 		return
 	}
@@ -72,7 +72,7 @@ func (h *Handler) GetBrandById(ctx *gin.Context) {
 	})
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: err.Error("This is not working ---> h.grpcClients.Brand.GetBrandByID"),
+			Error: "This is not working ---> GetBrandByID",
 		})
 		return
 	}
@@ -164,7 +164,7 @@ func (h *Handler) UpdateBrand(ctx *gin.Context) {
 	})
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: err.Error("error in updating"),
+			Error: "error in updating",
 		})
 		return
 	}
@@ -195,7 +195,7 @@ func (h *Handler) DeleteBrand(ctx *gin.Context) {
 	})
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: err.Error("Brand have been already deleted!"),
+			Error: "Brand have been already deleted!",
 		})
 		return
 	}
