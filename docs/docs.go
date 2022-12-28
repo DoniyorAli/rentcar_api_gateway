@@ -61,7 +61,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
@@ -69,7 +69,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/models.Article"
+                                                "$ref": "#/definitions/models.Brand"
                                             }
                                         }
                                     }
@@ -98,7 +98,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.UpdateArticleModel"
+                            "$ref": "#/definitions/models.UpdateBrandModel"
                         }
                     },
                     {
@@ -114,13 +114,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.Article"
+                                            "$ref": "#/definitions/models.Brand"
                                         }
                                     }
                                 }
@@ -130,7 +130,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.JSONErrorRespons"
+                            "$ref": "#/definitions/models.JSONErrorResponse"
                         }
                     }
                 }
@@ -154,7 +154,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.CreateModelArticle"
+                            "$ref": "#/definitions/models.CreateModelBrand"
                         }
                     },
                     {
@@ -170,13 +170,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.Article"
+                                            "$ref": "#/definitions/models.Brand"
                                         }
                                     }
                                 }
@@ -186,7 +186,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.JSONErrorRespons"
+                            "$ref": "#/definitions/models.JSONErrorResponse"
                         }
                     }
                 }
@@ -208,7 +208,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Article ID",
+                        "description": "Brand ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -226,13 +226,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.GetByIDArticleModel"
+                                            "$ref": "#/definitions/models.GetByIDBrandModel"
                                         }
                                     }
                                 }
@@ -242,7 +242,7 @@ const docTemplate = `{
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/models.JSONErrorRespons"
+                            "$ref": "#/definitions/models.JSONErrorResponse"
                         }
                     }
                 }
@@ -262,7 +262,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Article ID",
+                        "description": "Brand ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -280,13 +280,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.Article"
+                                            "$ref": "#/definitions/models.Brand"
                                         }
                                     }
                                 }
@@ -296,7 +296,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.JSONErrorRespons"
+                            "$ref": "#/definitions/models.JSONErrorResponse"
                         }
                     }
                 }
@@ -347,7 +347,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
@@ -355,7 +355,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/models.Author"
+                                                "$ref": "#/definitions/models.Car"
                                             }
                                         }
                                     }
@@ -400,13 +400,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.Author"
+                                            "$ref": "#/definitions/models.Car"
                                         }
                                     }
                                 }
@@ -416,7 +416,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.JSONErrorRespons"
+                            "$ref": "#/definitions/models.JSONErrorResponse"
                         }
                     }
                 }
@@ -456,7 +456,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
@@ -472,7 +472,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.JSONErrorRespons"
+                            "$ref": "#/definitions/models.JSONErrorResponse"
                         }
                     }
                 }
@@ -494,7 +494,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Article ID",
+                        "description": "Brand ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -512,13 +512,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.Author"
+                                            "$ref": "#/definitions/models.Car"
                                         }
                                     }
                                 }
@@ -528,7 +528,7 @@ const docTemplate = `{
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/models.JSONErrorRespons"
+                            "$ref": "#/definitions/models.JSONErrorResponse"
                         }
                     }
                 }
@@ -548,7 +548,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Author ID",
+                        "description": "Car ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -566,13 +566,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.Author"
+                                            "$ref": "#/definitions/models.Car"
                                         }
                                     }
                                 }
@@ -582,7 +582,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.JSONErrorRespons"
+                            "$ref": "#/definitions/models.JSONErrorResponse"
                         }
                     }
                 }
@@ -618,7 +618,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
@@ -634,7 +634,7 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/models.JSONErrorRespons"
+                            "$ref": "#/definitions/models.JSONErrorResponse"
                         }
                     }
                 }
@@ -679,7 +679,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/models.JSONRespons"
+                                    "$ref": "#/definitions/models.JSONResponse"
                                 },
                                 {
                                     "type": "object",
@@ -687,7 +687,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/models.Article"
+                                                "$ref": "#/definitions/models.Brand"
                                             }
                                         }
                                     }
@@ -700,7 +700,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "models.Article": {
+        "models.Brand": {
             "type": "object",
             "required": [
                 "author_id",
@@ -728,7 +728,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.Author": {
+        "models.Car": {
             "type": "object",
             "required": [
                 "fullname"
@@ -756,7 +756,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.CreateModelArticle": {
+        "models.CreateModelBrand": {
             "type": "object",
             "required": [
                 "author_id",
@@ -794,7 +794,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.GetByIDArticleModel": {
+        "models.GetByIDBrandModel": {
             "type": "object",
             "required": [
                 "author_id",
@@ -803,7 +803,7 @@ const docTemplate = `{
             ],
             "properties": {
                 "author_id": {
-                    "$ref": "#/definitions/models.Author"
+                    "$ref": "#/definitions/models.Car"
                 },
                 "body": {
                     "type": "string"
@@ -822,7 +822,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.JSONErrorRespons": {
+        "models.JSONErrorResponse": {
             "type": "object",
             "properties": {
                 "error": {
@@ -833,7 +833,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.JSONRespons": {
+        "models.JSONResponse": {
             "type": "object",
             "properties": {
                 "data": {},
@@ -865,7 +865,7 @@ const docTemplate = `{
                 }
             }
         },
-        "models.UpdateArticleModel": {
+        "models.UpdateBrandModel": {
             "type": "object",
             "required": [
                 "body",

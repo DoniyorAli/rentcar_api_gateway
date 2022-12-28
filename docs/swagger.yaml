@@ -1,5 +1,5 @@
 definitions:
-  models.Article:
+  models.Brand:
     properties:
       author_id:
         type: string
@@ -18,7 +18,7 @@ definitions:
     - body
     - title
     type: object
-  models.Author:
+  models.Car:
     properties:
       created_at:
         type: string
@@ -40,7 +40,7 @@ definitions:
     required:
     - fullname
     type: object
-  models.CreateModelArticle:
+  models.CreateModelBrand:
     properties:
       author_id:
         type: string
@@ -69,10 +69,10 @@ definitions:
     required:
     - fullname
     type: object
-  models.GetByIDArticleModel:
+  models.GetByIDBrandModel:
     properties:
       author_id:
-        $ref: '#/definitions/models.Author'
+        $ref: '#/definitions/models.Car'
       body:
         type: string
       created_at:
@@ -88,14 +88,14 @@ definitions:
     - body
     - title
     type: object
-  models.JSONErrorRespons:
+  models.JSONErrorResponse:
     properties:
       error:
         type: string
       message:
         type: string
     type: object
-  models.JSONRespons:
+  models.JSONResponse:
     properties:
       data: {}
       message:
@@ -116,7 +116,7 @@ definitions:
       token:
         type: string
     type: object
-  models.UpdateArticleModel:
+  models.UpdateBrandModel:
     properties:
       body:
         type: string
@@ -179,11 +179,11 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/models.Article'
+                    $ref: '#/definitions/models.Brand'
                   type: array
               type: object
       summary: List articles
@@ -199,7 +199,7 @@ paths:
         name: article
         required: true
         schema:
-          $ref: '#/definitions/models.CreateModelArticle'
+          $ref: '#/definitions/models.CreateModelBrand'
       - description: Authorization
         in: header
         name: Authorization
@@ -211,15 +211,15 @@ paths:
           description: Created
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.Article'
+                  $ref: '#/definitions/models.Brand'
               type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/models.JSONErrorRespons'
+            $ref: '#/definitions/models.JSONErrorResponse'
       summary: Create article
       tags:
       - articles
@@ -233,7 +233,7 @@ paths:
         name: article
         required: true
         schema:
-          $ref: '#/definitions/models.UpdateArticleModel'
+          $ref: '#/definitions/models.UpdateBrandModel'
       - description: Authorization
         in: header
         name: Authorization
@@ -245,15 +245,15 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.Article'
+                  $ref: '#/definitions/models.Brand'
               type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/models.JSONErrorRespons'
+            $ref: '#/definitions/models.JSONErrorResponse'
       summary: Update article
       tags:
       - articles
@@ -263,7 +263,7 @@ paths:
       - application/json
       description: delete article
       parameters:
-      - description: Article ID
+      - description: Brand ID
         in: path
         name: id
         required: true
@@ -279,15 +279,15 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.Article'
+                  $ref: '#/definitions/models.Brand'
               type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/models.JSONErrorRespons'
+            $ref: '#/definitions/models.JSONErrorResponse'
       summary: Delete article
       tags:
       - articles
@@ -296,7 +296,7 @@ paths:
       - application/json
       description: get a new article
       parameters:
-      - description: Article ID
+      - description: Brand ID
         in: path
         name: id
         required: true
@@ -312,15 +312,15 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.GetByIDArticleModel'
+                  $ref: '#/definitions/models.GetByIDBrandModel'
               type: object
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/models.JSONErrorRespons'
+            $ref: '#/definitions/models.JSONErrorResponse'
       summary: get article by id
       tags:
       - articles
@@ -353,11 +353,11 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/models.Author'
+                    $ref: '#/definitions/models.Car'
                   type: array
               type: object
       summary: List authors
@@ -385,7 +385,7 @@ paths:
           description: Created
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
                   type: string
@@ -393,7 +393,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/models.JSONErrorRespons'
+            $ref: '#/definitions/models.JSONErrorResponse'
       summary: Create author
       tags:
       - authors
@@ -419,15 +419,15 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.Author'
+                  $ref: '#/definitions/models.Car'
               type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/models.JSONErrorRespons'
+            $ref: '#/definitions/models.JSONErrorResponse'
       summary: Update author
       tags:
       - authors
@@ -437,7 +437,7 @@ paths:
       - application/json
       description: delete author
       parameters:
-      - description: Author ID
+      - description: Car ID
         in: path
         name: id
         required: true
@@ -453,15 +453,15 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.Author'
+                  $ref: '#/definitions/models.Car'
               type: object
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/models.JSONErrorRespons'
+            $ref: '#/definitions/models.JSONErrorResponse'
       summary: Delete author
       tags:
       - authors
@@ -470,7 +470,7 @@ paths:
       - application/json
       description: get a new author
       parameters:
-      - description: Article ID
+      - description: Brand ID
         in: path
         name: id
         required: true
@@ -486,15 +486,15 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.Author'
+                  $ref: '#/definitions/models.Car'
               type: object
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/models.JSONErrorRespons'
+            $ref: '#/definitions/models.JSONErrorResponse'
       summary: get author by id
       tags:
       - authors
@@ -517,7 +517,7 @@ paths:
           description: Created
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
                   $ref: '#/definitions/models.TokenResponse'
@@ -525,7 +525,7 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/models.JSONErrorRespons'
+            $ref: '#/definitions/models.JSONErrorResponse'
       summary: Login
       tags:
       - authorization (login)
@@ -554,11 +554,11 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/models.JSONRespons'
+            - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/models.Article'
+                    $ref: '#/definitions/models.Brand'
                   type: array
               type: object
       summary: List articles
