@@ -5,14 +5,14 @@ import (
 	"MyProjects/RentCar_gRPC/rentcar_api_gateway/config"
 )
 
-type handler struct {
-	cfg 	config.Config
+type Handler struct {
+	Cfg 	config.Config
 	grpcClients *clients.GrpcClients
 }
 
-func NewHandler(cfg config.Config, grpcClients *clients.GrpcClients) handler {
-	return handler{
-		cfg: cfg,
+func NewHandler(cfg config.Config, grpcClients *clients.GrpcClients) Handler {
+	return Handler{
+		Cfg: cfg,
 		grpcClients: grpcClients,
 	}
 }
