@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"UacademyGo/Blogpost/api_gateway/clients"
-	"UacademyGo/Blogpost/api_gateway/config"
+	"MyProjects/RentCar_gRPC/rentcar_api_gateway/clients"
+	"MyProjects/RentCar_gRPC/rentcar_api_gateway/config"
 )
 
 type handler struct {
