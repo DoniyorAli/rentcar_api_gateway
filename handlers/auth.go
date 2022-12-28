@@ -12,7 +12,7 @@ import (
 func (h Handler) AuthMiddleware(userType string) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		token := ctx.GetHeader("Authorization")
-		hasAccesResponse, err := h.grpcClients.Auth.HasAcces(ctx.Request.Context(), &authorization.TokenRequest{
+		hasAccesResponse, err := h.grpcClients.Auth.HasAccess(ctx.Request.Context(), &authorization.TokenRequest{
 			Token: token,
 		})
 
@@ -24,7 +24,7 @@ func (h Handler) AuthMiddleware(userType string) gin.HandlerFunc {
 			return
 		}
 
-		if !hasAccesResponse.HasAcces {
+		if !hasAccesResponse.HasAccess {
 			ctx.JSON(http.StatusUnauthorized, "Unauthorized")
 			ctx.Abort()
 			return
