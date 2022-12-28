@@ -10,22 +10,34 @@ import (
 
 // Config ...
 type Config struct {
-	App string
-	AppVersion string
-	Environment string	// devlopment, staging, production
-	HTTPPort string
+	App         string
+	AppVersion  string
+	Environment string // devlopment, staging, production
+
+	HTTPPort    string
+
+	GRPCPort string
 
 	DefaultOffset string
-	DefaultLimit string
+	DefaultLimit  string
 
-	AuthorServiceGrpcHost string
-	AuthorServiceGrpcPort string
+	CarServiceGrpcHost string
+	CarServiceGrpcPort string
 
-	ArticleServiceGrpcHost string
-	ArticleServiceGrpcPort string
+	BrandServiceGrpcHost string
+	BrandServiceGrpcPort string
 
-	AuthServiceGrpcHost string
-	AuthServiceGrpcPort string
+	RentalServiceGrpcHost string
+	RentalServiceGrpcPort string
+
+	AuthorizationServiceGrpcHost string
+	AuthorizationServiceGrpcPort string
+
+	// PostgresHost     string
+	// PostgresPort     int
+	// PostgresDatabase string
+	// PostgresUser     string
+	// PostgresPassword string
 }
 
 // Load ...
@@ -40,20 +52,30 @@ func Load() Config {
 	config.AppVersion = cast.ToString(getOrReturnDefaultValue("APP_VERSION", "1.0.0"))
 	config.Environment = cast.ToString(getOrReturnDefaultValue("ENVIRONMENT", "development"))
 
-	config.HTTPPort = cast.ToString(getOrReturnDefaultValue("HTTP_PORT", ":7070"))
+	config.HTTPPort = cast.ToString(getOrReturnDefaultValue("HTTP_PORT", ":6060"))
+	config.GRPCPort = cast.ToString(getOrReturnDefaultValue("GRPC_PORT", ":6003"))
 
 	config.DefaultOffset = cast.ToString(getOrReturnDefaultValue("DEFAULT_OFFSET", "0"))
 	config.DefaultLimit = cast.ToString(getOrReturnDefaultValue("DEFAULT_LIMIT", "10"))
 
-	config.AuthorServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("AUTHOR_SERVICE_GRPC_HOST", "localhost"))
-	config.AuthorServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("AUTHOR_SERVICE_GRPC_PORT", ":7001"))
+	config.CarServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("CAR_SERVICE_GRPC_HOST", "localhost"))
+	config.CarServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("CAR_SERVICE_GRPC_PORT", ":6001"))
 
-	config.ArticleServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("ARTICLE_SERVICE_GRPC_HOST", "localhost"))
-	config.ArticleServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("ARTICLE_SERVICE_GRPC_PORT", ":7001"))
+	config.BrandServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("BRAND_SERVICE_GRPC_HOST", "localhost"))
+	config.BrandServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("BRAND_SERVICE_GRPC_PORT", ":6001"))
 
-	config.AuthServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("AUTH_SERVICE_GRPC_HOST", "localhost"))
-	config.AuthServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("AUTH_SERVICE_GRPC_PORT", ":7002"))
- 
+	config.AuthorizationServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("AUTHORIZATION_SERVICE_GRPC_HOST", "localhost"))
+	config.AuthorizationServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("AUTHORIZATION_SERVICE_GRPC_PORT", ":6002"))
+
+	// config.RentalServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("RENTAL_SERVICE_GRPC_HOST", "localhost"))
+	// config.RentalServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("RENTAL_SERVICE_GRPC_PORT", ":6003"))
+
+	// config.PostgresHost = cast.ToString(getOrReturnDefaultValue("POSTGRES_HOST", "127.0.0.1"))
+	// config.PostgresPort = cast.ToInt(getOrReturnDefaultValue("POSTGRES_PORT", 5432))
+	// config.PostgresDatabase = cast.ToString(getOrReturnDefaultValue("POSTGRES_DATABASE", "rental_db"))
+	// config.PostgresUser = cast.ToString(getOrReturnDefaultValue("POSTGRES_USER", "rental_db_user"))
+	// config.PostgresPassword = cast.ToString(getOrReturnDefaultValue("POSTGRES_PASSWORD", "rental_db_password"))
+
 	return config
 }
 
