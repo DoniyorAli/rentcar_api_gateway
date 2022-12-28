@@ -1,45 +1,46 @@
 package clients
 
 import (
-	"UacademyGo/Blogpost/api_gateway/config"
-	"UacademyGo/Blogpost/api_gateway/protogen/blogpost"
+	"MyProjects/RentCar_gRPC/rentcar_api_gateway/config"
+	"MyProjects/RentCar_gRPC/rentcar_api_gateway/protogen/authorization"
+	"MyProjects/RentCar_gRPC/rentcar_api_gateway/protogen/brand"
+	"MyProjects/RentCar_gRPC/rentcar_api_gateway/protogen/car"
 
 	"google.golang.org/grpc"
 )
 
 type GrpcClients struct {
-	Author blogpost.AuthorServiceClient
-	Article blogpost.ArticleServiceClient
-	Auth blogpost.AuthServiceClient
-
+	Car   car.CarServiceClient
+	Brand brand.BrandServiceClient
+	Auth  authorization.AuthServiceClient
 	conns []*grpc.ClientConn
 }
 
 func NewGrpcClients(cfg config.Config) (*GrpcClients, error) {
-	connectAuthor, err := grpc.Dial(cfg.AuthorServiceGrpcHost+cfg.AuthorServiceGrpcPort, grpc.WithInsecure())
+	connectCar, err := grpc.Dial(cfg.CarServiceGrpcHost+cfg.CarServiceGrpcPort, grpc.WithInsecure())
 	if err != nil {
 		return nil, err
 	}
-	author := blogpost.NewAuthorServiceClient(connectAuthor)
+	car := car.NewCarServiceClient(connectCar)
 
-	connectArticle, err := grpc.Dial(cfg.ArticleServiceGrpcHost+cfg.ArticleServiceGrpcPort, grpc.WithInsecure())
+	connectBrand, err := grpc.Dial(cfg.BrandServiceGrpcHost+cfg.BrandServiceGrpcPort, grpc.WithInsecure())
 	if err != nil {
 		return nil, err
 	}
-	article := blogpost.NewArticleServiceClient(connectArticle)
+	brand := brand.NewBrandServiceClient(connectBrand)
 
-	connectAuth, err := grpc.Dial(cfg.AuthServiceGrpcHost+cfg.AuthServiceGrpcPort, grpc.WithInsecure())
+	connectAuth, err := grpc.Dial(cfg.AuthorizationServiceGrpcHost+cfg.AuthorizationServiceGrpcPort, grpc.WithInsecure())
 	if err != nil {
 		return nil, err
 	}
-	auth := blogpost.NewAuthServiceClient(connectAuth)
+	auth := authorization.NewAuthServiceClient(connectAuth)
 
 	conns := make([]*grpc.ClientConn, 0)
 	return &GrpcClients{
-		Author: author,
-		Article: article,
-		Auth: auth,
-		conns: append(conns, connectAuthor, connectArticle, connectAuth),
+		Car:   car,
+		Brand: brand,
+		Auth:  auth,
+		conns: append(conns, connectCar, connectBrand, connectAuth),
 	}, nil
 }
 
