@@ -40,17 +40,17 @@ func (h *Handler) CreateCar(ctx *gin.Context) {
 	})
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: err.Error("error in ---> h.grpcClients.Car.CreateCar"),
+			Error: "error in ---> CreateCar",
 		})
 		return
 	}
 
-	car, err := h.grpcClients.Car.GetAuthorByID(ctx.Request.Context(), &car.GetCarByIDRequest{
+	car, err := h.grpcClients.Car.GetCarByID(ctx.Request.Context(), &car.GetCarByIDRequest{
 		Id: obj.CarId,
 	})
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: err.Error("error in --->h.grpcClients.Car.GetAuthorByID"),
+			Error: "error in ---> GetAuthorByID",
 		})
 		return
 	}
@@ -78,12 +78,12 @@ func (h *Handler) GetCarById(ctx *gin.Context) {
 
 	//TODO UUID validation
 
-	car, err := h.grpcClients.Car.GetCarById(ctx.Request.Context(), &car.GetCarByIDRequest{
+	car, err := h.grpcClients.Car.GetCarByID(ctx.Request.Context(), &car.GetCarByIDRequest{
 		Id: idStr,
 	})
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: err.Error("error in ---> GetCarById"),
+			Error: "error in ---> GetCarById",
 		})
 		return
 	}
@@ -165,7 +165,7 @@ func (h *Handler) UpdateCar(ctx *gin.Context) {
 		return
 	}
 
-	updated, err := h.grpcClients.Car.UpdateAuthor(ctx.Request.Context(), &car.UpdateCarRequest{
+	updated, err := h.grpcClients.Car.UpdateCar(ctx.Request.Context(), &car.UpdateCarRequest{
 		Id:   body.CarId,
 		Model: body.Model,
 		Color: body.Color,
@@ -209,7 +209,7 @@ func (h *Handler) DeleteCar(ctx *gin.Context) {
 	})
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: err.Error("error in DeleteCar ---> GetCarByID"),
+			Error: "error in DeleteCar ---> GetCarByID",
 		})
 		return
 	}
