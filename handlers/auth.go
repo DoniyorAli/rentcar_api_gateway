@@ -1,23 +1,23 @@
 package handlers
 
 import (
-	"UacademyGo/Blogpost/api_gateway/models"
-	"UacademyGo/Blogpost/api_gateway/protogen/blogpost"
+	"MyProjects/RentCar_gRPC/rentcar_api_gateway/models"
+	"MyProjects/RentCar_gRPC/rentcar_api_gateway/protogen/authorization"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 // //* AuthMyCORSMiddleware ...
-func (h handler) AuthMiddleware(userType string) gin.HandlerFunc {
+func (h Handler) AuthMiddleware(userType string) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		token := ctx.GetHeader("Authorization")
-		hasAccesResponse, err := h.grpcClients.Auth.HasAcces(ctx.Request.Context(), &blogpost.TokenRequest{
+		hasAccesResponse, err := h.grpcClients.Auth.HasAcces(ctx.Request.Context(), &authorization.TokenRequest{
 			Token: token,
 		})
 
 		if err != nil {
-			ctx.JSON(http.StatusBadRequest, models.JSONErrorRespons{
+			ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
 				Error: err.Error(),
 			})
 			ctx.Abort()
@@ -30,8 +30,7 @@ func (h handler) AuthMiddleware(userType string) gin.HandlerFunc {
 			return
 		}
 
-
-		if userType!="*" {
+		if userType != "*" {
 			if hasAccesResponse.User.UserType != userType {
 				ctx.JSON(http.StatusUnauthorized, "Permission Denied")
 				ctx.Abort()
@@ -40,11 +39,10 @@ func (h handler) AuthMiddleware(userType string) gin.HandlerFunc {
 
 		ctx.Set("auth_username", hasAccesResponse.User.Username)
 		ctx.Set("auth_username", hasAccesResponse.User.Id)
-		
+
 		ctx.Next()
 	}
 }
-
 
 // * ================== Login ======================
 // Login godoc
@@ -54,29 +52,31 @@ func (h handler) AuthMiddleware(userType string) gin.HandlerFunc {
 // @Accept      json
 // @Produce     json
 // @Param       login body     models.LoginModel true "Login body"
-// @Success     201   {object} models.JSONRespons{data=models.TokenResponse}
-// @Failure     400   {object} models.JSONErrorRespons
+// @Success     201   {object} models.JSONResponse{data=models.TokenResponse}
+// @Failure     400   {object} models.JSONErrorResponse
 // @Router      /v1/login [post]
-func (h *handler) Login(ctx *gin.Context) {
+func (h *Handler) Login(ctx *gin.Context) {
 	var body models.LoginModel
 	if err := ctx.ShouldBindJSON(&body); err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorRespons{Error: err.Error()})
+		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{Error: err.Error()})
 		return
 	}
 
-	tokenResponse, err := h.grpcClients.Auth.Login(ctx.Request.Context(), &blogpost.LoginRequest{
+	//TODO need do validation
+
+	tokenResponse, err := h.grpcClients.Auth.Login(ctx.Request.Context(), &authorization.LoginRequest{
 		Username: body.Username,
 		Password: body.Password,
-	}) 
+	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorRespons{
+		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
 			Error: err.Error(),
 		})
 		return
 	}
 
-	ctx.JSON(http.StatusCreated, models.JSONRespons{
-		Message: "Article successfully created",
+	ctx.JSON(http.StatusCreated, models.JSONResponse{
+		Message: "Brand successfully created",
 		Data:    tokenResponse,
 	})
 }
