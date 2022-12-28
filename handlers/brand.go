@@ -22,7 +22,7 @@ import (
 // @Success     201           {object} models.JSONResponse{data=models.Brand}
 // @Failure     400           {object} models.JSONErrorResponse
 // @Router      /v1/brand [post]
-func (h *handler) CreateBrand(ctx *gin.Context) {
+func (h *Handler) CreateBrand(ctx *gin.Context) {
 	var body models.CreateBrandModel
 	if err := ctx.ShouldBindJSON(&body); err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{Error: err.Error()})
@@ -62,7 +62,7 @@ func (h *handler) CreateBrand(ctx *gin.Context) {
 // @Success     200 {object} models.JSONResponse{data=models.Brand}
 // @Failure     404 {object} models.JSONErrorResponse
 // @Router      /v1/brand/{id} [get]
-func (h *handler) GetBrandById(ctx *gin.Context) {
+func (h *Handler) GetBrandById(ctx *gin.Context) {
 	idStr := ctx.Param("id")
 
 	//TODO UUID validation
@@ -96,10 +96,10 @@ func (h *handler) GetBrandById(ctx *gin.Context) {
 // @Param       Authorization header   string false "Authorization"
 // @Success     200           {object} models.JSONResponse{data=[]models.Brand}
 // @Router      /v1/brand [get]
-func (h *handler) GetBrandList(ctx *gin.Context) {
+func (h *Handler) GetBrandList(ctx *gin.Context) {
 
-	offsetStr := ctx.DefaultQuery("offset", h.cfg.DefaultOffset)
-	limitStr := ctx.DefaultQuery("limit", h.cfg.DefaultLimit)
+	offsetStr := ctx.DefaultQuery("offset", h.Cfg.DefaultOffset)
+	limitStr := ctx.DefaultQuery("limit", h.Cfg.DefaultLimit)
 	searchStr := ctx.DefaultQuery("search", "")
 
 	offset, err := strconv.Atoi(offsetStr)
@@ -148,7 +148,7 @@ func (h *handler) GetBrandList(ctx *gin.Context) {
 // @Success     200 {object} models.JSONResponse{data=models.Brand}
 // @Failure     400 {object} models.JSONErrorResponse
 // @Router      /v1/brand [put]
-func (h *handler) UpdateBrand(ctx *gin.Context) {
+func (h *Handler) UpdateBrand(ctx *gin.Context) {
 	var body models.UpdateBrandModel
 	if err := ctx.ShouldBindJSON(&body); err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{Error: err.Error()})
@@ -187,7 +187,7 @@ func (h *handler) UpdateBrand(ctx *gin.Context) {
 // @Success     200 {object} models.JSONResponse{data=models.Brand}
 // @Failure     400 {object} models.JSONErrorResponse
 // @Router      /v1/brand/{id} [delete]
-func (h *handler) DeleteBrand(ctx *gin.Context) {
+func (h *Handler) DeleteBrand(ctx *gin.Context) {
 	idStr := ctx.Param("id")
 
 	brand, err := h.grpcClients.Brand.DeleteBrand(ctx.Request.Context(), &brand.DeleteBrandRequest{
