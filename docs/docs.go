@@ -16,9 +16,9 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/v1/article": {
+        "/v1/brand": {
             "get": {
-                "description": "get articles",
+                "description": "get brands",
                 "consumes": [
                     "application/json"
                 ],
@@ -26,9 +26,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "articles"
+                    "brands"
                 ],
-                "summary": "List articles",
+                "summary": "List brands",
                 "parameters": [
                     {
                         "type": "integer",
@@ -44,7 +44,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "smth",
+                        "description": "search",
                         "name": "search",
                         "in": "query"
                     },
@@ -80,7 +80,7 @@ const docTemplate = `{
                 }
             },
             "put": {
-                "description": "Update a new article",
+                "description": "Update a new brand",
                 "consumes": [
                     "application/json"
                 ],
@@ -88,13 +88,13 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "articles"
+                    "brands"
                 ],
-                "summary": "Update article",
+                "summary": "Update brand",
                 "parameters": [
                     {
-                        "description": "updating article",
-                        "name": "article",
+                        "description": "updating brand",
+                        "name": "brand",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -136,7 +136,7 @@ const docTemplate = `{
                 }
             },
             "post": {
-                "description": "Create a new article",
+                "description": "Create a new brand",
                 "consumes": [
                     "application/json"
                 ],
@@ -144,17 +144,17 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "articles"
+                    "brands"
                 ],
-                "summary": "Create article",
+                "summary": "Create brand",
                 "parameters": [
                     {
-                        "description": "article body",
-                        "name": "article",
+                        "description": "brand body",
+                        "name": "brand",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.CreateModelBrand"
+                            "$ref": "#/definitions/models.CreateBrandModel"
                         }
                     },
                     {
@@ -192,9 +192,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/v1/article/{id}": {
+        "/v1/brand/{id}": {
             "get": {
-                "description": "get a new article",
+                "description": "get a new brand",
                 "consumes": [
                     "application/json"
                 ],
@@ -202,9 +202,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "articles"
+                    "brands"
                 ],
-                "summary": "get article by id",
+                "summary": "get brand by id",
                 "parameters": [
                     {
                         "type": "string",
@@ -232,7 +232,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.GetByIDBrandModel"
+                                            "$ref": "#/definitions/models.Brand"
                                         }
                                     }
                                 }
@@ -248,7 +248,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "delete article",
+                "description": "delete brand",
                 "consumes": [
                     "application/json"
                 ],
@@ -256,9 +256,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "articles"
+                    "brands"
                 ],
-                "summary": "Delete article",
+                "summary": "Delete brand",
                 "parameters": [
                     {
                         "type": "string",
@@ -302,9 +302,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/v1/author": {
+        "/v1/car": {
             "get": {
-                "description": "get authors",
+                "description": "get cars",
                 "consumes": [
                     "application/json"
                 ],
@@ -312,9 +312,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "authors"
+                    "cars"
                 ],
-                "summary": "List authors",
+                "summary": "List cars",
                 "parameters": [
                     {
                         "type": "integer",
@@ -330,7 +330,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "smth",
+                        "description": "search",
                         "name": "search",
                         "in": "query"
                     },
@@ -366,7 +366,7 @@ const docTemplate = `{
                 }
             },
             "put": {
-                "description": "Update a new author",
+                "description": "Update a new car",
                 "consumes": [
                     "application/json"
                 ],
@@ -374,17 +374,17 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "authors"
+                    "cars"
                 ],
-                "summary": "Update author",
+                "summary": "Update car",
                 "parameters": [
                     {
-                        "description": "updating author",
-                        "name": "author",
+                        "description": "updating car",
+                        "name": "car",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.UpdateAuthorResponse"
+                            "$ref": "#/definitions/models.UpdateCarModel"
                         }
                     },
                     {
@@ -422,7 +422,7 @@ const docTemplate = `{
                 }
             },
             "post": {
-                "description": "Create a new author",
+                "description": "Create a new car",
                 "consumes": [
                     "application/json"
                 ],
@@ -430,17 +430,17 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "authors"
+                    "cars"
                 ],
-                "summary": "Create author",
+                "summary": "Create car",
                 "parameters": [
                     {
-                        "description": "author body",
-                        "name": "author",
+                        "description": "car body",
+                        "name": "car",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.CreateModelAuthor"
+                            "$ref": "#/definitions/models.CreateCarModel"
                         }
                     },
                     {
@@ -462,7 +462,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "type": "string"
+                                            "$ref": "#/definitions/models.PackedCarModel"
                                         }
                                     }
                                 }
@@ -478,9 +478,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/v1/author/{id}": {
+        "/v1/car/{id}": {
             "get": {
-                "description": "get a new author",
+                "description": "get a new car",
                 "consumes": [
                     "application/json"
                 ],
@@ -488,13 +488,13 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "authors"
+                    "cars"
                 ],
-                "summary": "get author by id",
+                "summary": "get car by id",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Brand ID",
+                        "description": "Car ID",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -518,7 +518,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/models.Car"
+                                            "$ref": "#/definitions/models.PackedCarModel"
                                         }
                                     }
                                 }
@@ -534,7 +534,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "delete author",
+                "description": "delete car",
                 "consumes": [
                     "application/json"
                 ],
@@ -542,9 +542,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "authors"
+                    "cars"
                 ],
-                "summary": "Delete author",
+                "summary": "Delete car",
                 "parameters": [
                     {
                         "type": "string",
@@ -639,89 +639,41 @@ const docTemplate = `{
                     }
                 }
             }
-        },
-        "/v1/my_articles": {
-            "get": {
-                "description": "get articles",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "articles"
-                ],
-                "summary": "List articles",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "0",
-                        "name": "offset",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "10",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Authorization",
-                        "name": "Authorization",
-                        "in": "header"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/models.JSONResponse"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/models.Brand"
-                                            }
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
         }
     },
     "definitions": {
         "models.Brand": {
             "type": "object",
             "required": [
-                "author_id",
-                "body",
-                "title"
+                "aboutbrand",
+                "country",
+                "manufacturer",
+                "name"
             ],
             "properties": {
-                "author_id": {
+                "aboutbrand": {
+                    "type": "string",
+                    "example": "At Mercedes_Benz, our employes and communities are ate the heart of everything we do"
+                },
+                "brand_id": {
                     "type": "string"
                 },
-                "body": {
-                    "type": "string"
+                "country": {
+                    "type": "string",
+                    "example": "USA, KOREA, GERMANY"
                 },
                 "created_at": {
                     "type": "string"
                 },
-                "id": {
-                    "type": "string"
+                "manufacturer": {
+                    "type": "string",
+                    "example": "Berlin"
                 },
-                "title": {
-                    "type": "string"
+                "name": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 2,
+                    "example": "Sherlock"
                 },
                 "updated_at": {
                     "type": "string"
@@ -731,94 +683,110 @@ const docTemplate = `{
         "models.Car": {
             "type": "object",
             "required": [
-                "fullname"
+                "model"
             ],
             "properties": {
-                "created_at": {
-                    "type": "string"
-                },
-                "fullname": {
-                    "description": "Lastname  string ` + "`" + `json:\"lastname\" binding:\"required\" minLenth:\"3\" maxLength:\"16\" example:\"John\"` + "`" + `\nFirstname string ` + "`" + `json:\"firstname\" binding:\"required\" minLenth:\"3\" maxLength:\"16\" example:\"Doe\"` + "`" + `",
+                "brand_id": {
                     "type": "string",
-                    "maxLength": 255,
-                    "example": "Sherlock Holmes"
+                    "example": "1"
                 },
-                "id": {
+                "car_id": {
                     "type": "string"
                 },
-                "middlename": {
+                "car_type": {
                     "type": "string",
-                    "maxLength": 15,
-                    "example": "Sherlock"
+                    "example": "electro_car"
                 },
-                "updated_at": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.CreateModelBrand": {
-            "type": "object",
-            "required": [
-                "author_id",
-                "body",
-                "title"
-            ],
-            "properties": {
-                "author_id": {
-                    "type": "string"
-                },
-                "body": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.CreateModelAuthor": {
-            "type": "object",
-            "required": [
-                "fullname"
-            ],
-            "properties": {
-                "fullname": {
-                    "description": "Lastname  string ` + "`" + `json:\"lastname\" binding:\"required\" minLenth:\"3\" maxLength:\"16\" example:\"John\"` + "`" + `\nFirstname string ` + "`" + `json:\"firstname\" binding:\"required\" minLenth:\"3\" maxLength:\"16\" example:\"Doe\"` + "`" + `",
+                "color": {
                     "type": "string",
-                    "maxLength": 255,
-                    "example": "Sherlock Holmes"
-                },
-                "middlename": {
-                    "type": "string",
-                    "maxLength": 15,
-                    "example": "Sherlock"
-                }
-            }
-        },
-        "models.GetByIDBrandModel": {
-            "type": "object",
-            "required": [
-                "author_id",
-                "body",
-                "title"
-            ],
-            "properties": {
-                "author_id": {
-                    "$ref": "#/definitions/models.Car"
-                },
-                "body": {
-                    "type": "string"
+                    "example": "Dark-Black"
                 },
                 "created_at": {
                     "type": "string"
                 },
-                "id": {
-                    "type": "string"
+                "mileage": {
+                    "type": "string",
+                    "example": "360-km"
                 },
-                "title": {
-                    "type": "string"
+                "model": {
+                    "type": "string",
+                    "example": "Tesla Company"
+                },
+                "price": {
+                    "type": "string",
+                    "example": "70$"
                 },
                 "updated_at": {
                     "type": "string"
+                },
+                "year": {
+                    "type": "string",
+                    "example": "2020"
+                }
+            }
+        },
+        "models.CreateBrandModel": {
+            "type": "object",
+            "required": [
+                "aboutbrand",
+                "country",
+                "manufacturer",
+                "name"
+            ],
+            "properties": {
+                "aboutbrand": {
+                    "type": "string",
+                    "example": "At Mercedes_Benz, our employes and communities are ate the heart of everything we do"
+                },
+                "country": {
+                    "type": "string",
+                    "example": "USA, KOREA, GERMANY"
+                },
+                "manufacturer": {
+                    "type": "string",
+                    "example": "Berlin"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 2,
+                    "example": "Sherlock"
+                }
+            }
+        },
+        "models.CreateCarModel": {
+            "type": "object",
+            "required": [
+                "model"
+            ],
+            "properties": {
+                "brand_id": {
+                    "type": "string",
+                    "example": "1"
+                },
+                "car_type": {
+                    "type": "string",
+                    "example": "electro_car"
+                },
+                "color": {
+                    "type": "string",
+                    "example": "Dark-Black"
+                },
+                "mileage": {
+                    "type": "string",
+                    "example": "360-km"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "Tesla Company"
+                },
+                "price": {
+                    "type": "string",
+                    "example": "70$"
+                },
+                "year": {
+                    "type": "string",
+                    "example": "2020"
                 }
             }
         },
@@ -857,6 +825,50 @@ const docTemplate = `{
                 }
             }
         },
+        "models.PackedCarModel": {
+            "type": "object",
+            "required": [
+                "fullname"
+            ],
+            "properties": {
+                "brand_id": {
+                    "$ref": "#/definitions/models.Brand"
+                },
+                "car_id": {
+                    "type": "string"
+                },
+                "car_type": {
+                    "type": "string",
+                    "example": "electro_car"
+                },
+                "color": {
+                    "type": "string",
+                    "example": "White"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string",
+                    "example": "Tesla"
+                },
+                "mileage": {
+                    "type": "string",
+                    "example": "540-km"
+                },
+                "price": {
+                    "type": "string",
+                    "example": "80$"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "year": {
+                    "type": "string",
+                    "example": "2022"
+                }
+            }
+        },
         "models.TokenResponse": {
             "type": "object",
             "properties": {
@@ -868,41 +880,71 @@ const docTemplate = `{
         "models.UpdateBrandModel": {
             "type": "object",
             "required": [
-                "body",
-                "id",
-                "title"
+                "aboutbrand",
+                "country",
+                "manufacturer",
+                "name"
             ],
             "properties": {
-                "body": {
+                "aboutbrand": {
+                    "type": "string",
+                    "example": "At Mercedes_Benz, our employes and communities are ate the heart of everything we do"
+                },
+                "brand_id": {
                     "type": "string"
                 },
-                "id": {
-                    "type": "string"
+                "country": {
+                    "type": "string",
+                    "example": "USA, KOREA, GERMANY"
                 },
-                "title": {
-                    "type": "string"
+                "manufacturer": {
+                    "type": "string",
+                    "example": "Berlin"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 2,
+                    "example": "Sherlock"
                 }
             }
         },
-        "models.UpdateAuthorResponse": {
+        "models.UpdateCarModel": {
             "type": "object",
             "required": [
-                "fullname"
+                "model"
             ],
             "properties": {
-                "fullname": {
-                    "description": "Lastname  string ` + "`" + `json:\"lastname\" binding:\"required\" minLenth:\"3\" maxLength:\"16\" example:\"John\"` + "`" + `\nFirstname string ` + "`" + `json:\"firstname\" binding:\"required\" minLenth:\"3\" maxLength:\"16\" example:\"Doe\"` + "`" + `",
+                "brand_id": {
                     "type": "string",
-                    "maxLength": 255,
-                    "example": "Sherlock Holmes"
+                    "example": "1"
                 },
-                "id": {
+                "car_id": {
                     "type": "string"
                 },
-                "middlename": {
+                "car_type": {
                     "type": "string",
-                    "maxLength": 15,
-                    "example": "Sherlock"
+                    "example": "electro_car"
+                },
+                "color": {
+                    "type": "string",
+                    "example": "Dark-Black"
+                },
+                "mileage": {
+                    "type": "string",
+                    "example": "360-km"
+                },
+                "model": {
+                    "type": "string",
+                    "example": "Tesla Company"
+                },
+                "price": {
+                    "type": "string",
+                    "example": "70$"
+                },
+                "year": {
+                    "type": "string",
+                    "example": "2020"
                 }
             }
         }

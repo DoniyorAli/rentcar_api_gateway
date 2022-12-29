@@ -1,92 +1,113 @@
 definitions:
   models.Brand:
     properties:
-      author_id:
+      aboutbrand:
+        example: At Mercedes_Benz, our employes and communities are ate the heart
+          of everything we do
         type: string
-      body:
+      brand_id:
+        type: string
+      country:
+        example: USA, KOREA, GERMANY
         type: string
       created_at:
         type: string
-      id:
+      manufacturer:
+        example: Berlin
         type: string
-      title:
+      name:
+        example: Sherlock
+        maxLength: 50
+        minLength: 2
         type: string
       updated_at:
         type: string
     required:
-    - author_id
-    - body
-    - title
+    - aboutbrand
+    - country
+    - manufacturer
+    - name
     type: object
   models.Car:
     properties:
-      created_at:
+      brand_id:
+        example: "1"
         type: string
-      fullname:
-        description: |-
-          Lastname  string `json:"lastname" binding:"required" minLenth:"3" maxLength:"16" example:"John"`
-          Firstname string `json:"firstname" binding:"required" minLenth:"3" maxLength:"16" example:"Doe"`
-        example: Sherlock Holmes
-        maxLength: 255
+      car_id:
         type: string
-      id:
+      car_type:
+        example: electro_car
         type: string
-      middlename:
-        example: Sherlock
-        maxLength: 15
-        type: string
-      updated_at:
-        type: string
-    required:
-    - fullname
-    type: object
-  models.CreateModelBrand:
-    properties:
-      author_id:
-        type: string
-      body:
-        type: string
-      title:
-        type: string
-    required:
-    - author_id
-    - body
-    - title
-    type: object
-  models.CreateModelAuthor:
-    properties:
-      fullname:
-        description: |-
-          Lastname  string `json:"lastname" binding:"required" minLenth:"3" maxLength:"16" example:"John"`
-          Firstname string `json:"firstname" binding:"required" minLenth:"3" maxLength:"16" example:"Doe"`
-        example: Sherlock Holmes
-        maxLength: 255
-        type: string
-      middlename:
-        example: Sherlock
-        maxLength: 15
-        type: string
-    required:
-    - fullname
-    type: object
-  models.GetByIDBrandModel:
-    properties:
-      author_id:
-        $ref: '#/definitions/models.Car'
-      body:
+      color:
+        example: Dark-Black
         type: string
       created_at:
         type: string
-      id:
+      mileage:
+        example: 360-km
         type: string
-      title:
+      model:
+        example: Tesla Company
+        type: string
+      price:
+        example: 70$
         type: string
       updated_at:
         type: string
+      year:
+        example: "2020"
+        type: string
     required:
-    - author_id
-    - body
-    - title
+    - model
+    type: object
+  models.CreateBrandModel:
+    properties:
+      aboutbrand:
+        example: At Mercedes_Benz, our employes and communities are ate the heart
+          of everything we do
+        type: string
+      country:
+        example: USA, KOREA, GERMANY
+        type: string
+      manufacturer:
+        example: Berlin
+        type: string
+      name:
+        example: Sherlock
+        maxLength: 50
+        minLength: 2
+        type: string
+    required:
+    - aboutbrand
+    - country
+    - manufacturer
+    - name
+    type: object
+  models.CreateCarModel:
+    properties:
+      brand_id:
+        example: "1"
+        type: string
+      car_type:
+        example: electro_car
+        type: string
+      color:
+        example: Dark-Black
+        type: string
+      mileage:
+        example: 360-km
+        type: string
+      model:
+        example: Tesla Company
+        type: string
+      price:
+        example: 70$
+        type: string
+      year:
+        example: "2020"
+        type: string
+    required:
+    - model
     type: object
   models.JSONErrorResponse:
     properties:
@@ -111,6 +132,37 @@ definitions:
     - password
     - username
     type: object
+  models.PackedCarModel:
+    properties:
+      brand_id:
+        $ref: '#/definitions/models.Brand'
+      car_id:
+        type: string
+      car_type:
+        example: electro_car
+        type: string
+      color:
+        example: White
+        type: string
+      created_at:
+        type: string
+      fullname:
+        example: Tesla
+        type: string
+      mileage:
+        example: 540-km
+        type: string
+      price:
+        example: 80$
+        type: string
+      updated_at:
+        type: string
+      year:
+        example: "2022"
+        type: string
+    required:
+    - fullname
+    type: object
   models.TokenResponse:
     properties:
       token:
@@ -118,43 +170,65 @@ definitions:
     type: object
   models.UpdateBrandModel:
     properties:
-      body:
+      aboutbrand:
+        example: At Mercedes_Benz, our employes and communities are ate the heart
+          of everything we do
         type: string
-      id:
+      brand_id:
         type: string
-      title:
+      country:
+        example: USA, KOREA, GERMANY
         type: string
-    required:
-    - body
-    - id
-    - title
-    type: object
-  models.UpdateAuthorResponse:
-    properties:
-      fullname:
-        description: |-
-          Lastname  string `json:"lastname" binding:"required" minLenth:"3" maxLength:"16" example:"John"`
-          Firstname string `json:"firstname" binding:"required" minLenth:"3" maxLength:"16" example:"Doe"`
-        example: Sherlock Holmes
-        maxLength: 255
+      manufacturer:
+        example: Berlin
         type: string
-      id:
-        type: string
-      middlename:
+      name:
         example: Sherlock
-        maxLength: 15
+        maxLength: 50
+        minLength: 2
         type: string
     required:
-    - fullname
+    - aboutbrand
+    - country
+    - manufacturer
+    - name
+    type: object
+  models.UpdateCarModel:
+    properties:
+      brand_id:
+        example: "1"
+        type: string
+      car_id:
+        type: string
+      car_type:
+        example: electro_car
+        type: string
+      color:
+        example: Dark-Black
+        type: string
+      mileage:
+        example: 360-km
+        type: string
+      model:
+        example: Tesla Company
+        type: string
+      price:
+        example: 70$
+        type: string
+      year:
+        example: "2020"
+        type: string
+    required:
+    - model
     type: object
 info:
   contact: {}
 paths:
-  /v1/article:
+  /v1/brand:
     get:
       consumes:
       - application/json
-      description: get articles
+      description: get brands
       parameters:
       - description: "0"
         in: query
@@ -164,7 +238,7 @@ paths:
         in: query
         name: limit
         type: integer
-      - description: smth
+      - description: search
         in: query
         name: search
         type: string
@@ -186,20 +260,20 @@ paths:
                     $ref: '#/definitions/models.Brand'
                   type: array
               type: object
-      summary: List articles
+      summary: List brands
       tags:
-      - articles
+      - brands
     post:
       consumes:
       - application/json
-      description: Create a new article
+      description: Create a new brand
       parameters:
-      - description: article body
+      - description: brand body
         in: body
-        name: article
+        name: brand
         required: true
         schema:
-          $ref: '#/definitions/models.CreateModelBrand'
+          $ref: '#/definitions/models.CreateBrandModel'
       - description: Authorization
         in: header
         name: Authorization
@@ -220,17 +294,17 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: Create article
+      summary: Create brand
       tags:
-      - articles
+      - brands
     put:
       consumes:
       - application/json
-      description: Update a new article
+      description: Update a new brand
       parameters:
-      - description: updating article
+      - description: updating brand
         in: body
-        name: article
+        name: brand
         required: true
         schema:
           $ref: '#/definitions/models.UpdateBrandModel'
@@ -254,14 +328,14 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: Update article
+      summary: Update brand
       tags:
-      - articles
-  /v1/article/{id}:
+      - brands
+  /v1/brand/{id}:
     delete:
       consumes:
       - application/json
-      description: delete article
+      description: delete brand
       parameters:
       - description: Brand ID
         in: path
@@ -288,13 +362,13 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: Delete article
+      summary: Delete brand
       tags:
-      - articles
+      - brands
     get:
       consumes:
       - application/json
-      description: get a new article
+      description: get a new brand
       parameters:
       - description: Brand ID
         in: path
@@ -315,20 +389,20 @@ paths:
             - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.GetByIDBrandModel'
+                  $ref: '#/definitions/models.Brand'
               type: object
         "404":
           description: Not Found
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: get article by id
+      summary: get brand by id
       tags:
-      - articles
-  /v1/author:
+      - brands
+  /v1/car:
     get:
       consumes:
       - application/json
-      description: get authors
+      description: get cars
       parameters:
       - description: "0"
         in: query
@@ -338,7 +412,7 @@ paths:
         in: query
         name: limit
         type: integer
-      - description: smth
+      - description: search
         in: query
         name: search
         type: string
@@ -360,20 +434,20 @@ paths:
                     $ref: '#/definitions/models.Car'
                   type: array
               type: object
-      summary: List authors
+      summary: List cars
       tags:
-      - authors
+      - cars
     post:
       consumes:
       - application/json
-      description: Create a new author
+      description: Create a new car
       parameters:
-      - description: author body
+      - description: car body
         in: body
-        name: author
+        name: car
         required: true
         schema:
-          $ref: '#/definitions/models.CreateModelAuthor'
+          $ref: '#/definitions/models.CreateCarModel'
       - description: Authorization
         in: header
         name: Authorization
@@ -388,26 +462,26 @@ paths:
             - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  type: string
+                  $ref: '#/definitions/models.PackedCarModel'
               type: object
         "400":
           description: Bad Request
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: Create author
+      summary: Create car
       tags:
-      - authors
+      - cars
     put:
       consumes:
       - application/json
-      description: Update a new author
+      description: Update a new car
       parameters:
-      - description: updating author
+      - description: updating car
         in: body
-        name: author
+        name: car
         required: true
         schema:
-          $ref: '#/definitions/models.UpdateAuthorResponse'
+          $ref: '#/definitions/models.UpdateCarModel'
       - description: Authorization
         in: header
         name: Authorization
@@ -428,14 +502,14 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: Update author
+      summary: Update car
       tags:
-      - authors
-  /v1/author/{id}:
+      - cars
+  /v1/car/{id}:
     delete:
       consumes:
       - application/json
-      description: delete author
+      description: delete car
       parameters:
       - description: Car ID
         in: path
@@ -462,15 +536,15 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: Delete author
+      summary: Delete car
       tags:
-      - authors
+      - cars
     get:
       consumes:
       - application/json
-      description: get a new author
+      description: get a new car
       parameters:
-      - description: Brand ID
+      - description: Car ID
         in: path
         name: id
         required: true
@@ -489,15 +563,15 @@ paths:
             - $ref: '#/definitions/models.JSONResponse'
             - properties:
                 data:
-                  $ref: '#/definitions/models.Car'
+                  $ref: '#/definitions/models.PackedCarModel'
               type: object
         "404":
           description: Not Found
           schema:
             $ref: '#/definitions/models.JSONErrorResponse'
-      summary: get author by id
+      summary: get car by id
       tags:
-      - authors
+      - cars
   /v1/login:
     post:
       consumes:
@@ -529,39 +603,4 @@ paths:
       summary: Login
       tags:
       - authorization (login)
-  /v1/my_articles:
-    get:
-      consumes:
-      - application/json
-      description: get articles
-      parameters:
-      - description: "0"
-        in: query
-        name: offset
-        type: integer
-      - description: "10"
-        in: query
-        name: limit
-        type: integer
-      - description: Authorization
-        in: header
-        name: Authorization
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/models.JSONResponse'
-            - properties:
-                data:
-                  items:
-                    $ref: '#/definitions/models.Brand'
-                  type: array
-              type: object
-      summary: List articles
-      tags:
-      - articles
 swagger: "2.0"
