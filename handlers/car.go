@@ -16,10 +16,10 @@ import (
 // @Description Create a new car
 // @Tags        cars
 // @Accept      json
-// @Param       car        body   models.CreateCarModel true  "car body"
-// @Param       Authorization header string                   false "Authorization"
+// @Param       car           body   models.CreateCarModel true  "car body"
+// @Param       Authorization header string                false "Authorization"
 // @Produce     json
-// @Success     201 {object} models.JSONResponse{data=PackedCarModel}
+// @Success     201 {object} models.JSONResponse{data=models.PackedCarModel}
 // @Failure     400 {object} models.JSONErrorResponse
 // @Router      /v1/car [post]
 func (h *Handler) CreateCar(ctx *gin.Context) {
@@ -152,8 +152,8 @@ func (h *Handler) GetCarList(ctx *gin.Context) {
 // @Description Update a new car
 // @Tags        cars
 // @Accept      json
-// @Param       car        body   models.UpdateCarModel true  "updating car"
-// @Param       Authorization header string                      false "Authorization"
+// @Param       car           body   models.UpdateCarModel true  "updating car"
+// @Param       Authorization header string                false "Authorization"
 // @Produce     json
 // @Success     200 {object} models.JSONResponse{data=models.Car}
 // @Failure     400 {object} models.JSONErrorResponse
