@@ -55,11 +55,11 @@ func main() {
 		v1.Use(MyCORSMiddleware())
 		v1.POST("/login", h.Login)
 
-		v1.POST("/article", h.AuthMiddleware("*"), h.CreateBrand)
-		v1.GET("/article/:id", h.AuthMiddleware("*"), h.GetBrandById)
-		v1.GET("/article", h.AuthMiddleware("*"), h.GetBrandList)
-		v1.PUT("/article", h.AuthMiddleware("*"), h.UpdateBrand)
-		v1.DELETE("/article/:id", h.AuthMiddleware("ADMIN"), h.DeleteBrand)
+		v1.POST("/car", h.AuthMiddleware("*"), h.CreateCar)
+		v1.GET("/car/:id", h.AuthMiddleware("*"), h.GetCarById)
+		v1.GET("/car", h.AuthMiddleware("*"), h.GetCarList)
+		v1.PUT("/car", h.AuthMiddleware("*"), h.UpdateCar)
+		v1.DELETE("/car/:id", h.AuthMiddleware("ADMIN"), h.DeleteCar)
 
 		v1.POST("brand", h.AuthMiddleware("*"), h.CreateBrand)
 		v1.GET("/brand/:id", h.AuthMiddleware("*"), h.GetBrandById)
