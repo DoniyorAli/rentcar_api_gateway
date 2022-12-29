@@ -17,8 +17,8 @@ import (
 // @Tags        brands
 // @Accept      json
 // @Produce     json
-// @Param       brand       body     models.CreateBrandModel true  "brand body"
-// @Param       Authorization header   string                    false "Authorization"
+// @Param       brand         body     models.CreateBrandModel true  "brand body"
+// @Param       Authorization header   string                  false "Authorization"
 // @Success     201           {object} models.JSONResponse{data=models.Brand}
 // @Failure     400           {object} models.JSONErrorResponse
 // @Router      /v1/brand [post]
@@ -142,8 +142,8 @@ func (h *Handler) GetBrandList(ctx *gin.Context) {
 // @Description Update a new brand
 // @Tags        brands
 // @Accept      json
-// @Param       brand       body   models.UpdateBrandModel true  "updating brand"
-// @Param       Authorization header string                    false "Authorization"
+// @Param       brand         body   models.UpdateBrandModel true  "updating brand"
+// @Param       Authorization header string                  false "Authorization"
 // @Produce     json
 // @Success     200 {object} models.JSONResponse{data=models.Brand}
 // @Failure     400 {object} models.JSONErrorResponse
