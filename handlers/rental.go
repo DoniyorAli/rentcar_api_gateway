@@ -76,7 +76,7 @@ func (h Handler) CreateRental(ctx *gin.Context) {
 // * ==================== GetRentalById ====================
 // GetRentalById godoc
 // @Summary     get rental by id
-// @Description get a new rental
+// @Description get a rental by id
 // @Tags        rentals
 // @Accept      json
 // @Param       id            path   string true  "Rental ID"
@@ -94,7 +94,7 @@ func (h Handler) GetRentalByID(ctx *gin.Context) {
 		RentalId: idStr,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: "This is not working ---> GetRentalByID",
 		})
 		return
@@ -165,7 +165,7 @@ func (h Handler) GetRentalList(ctx *gin.Context) {
 
 	offset, err := strconv.Atoi(offsetStr)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: "error in offset",
 		})
 		return
@@ -173,7 +173,7 @@ func (h Handler) GetRentalList(ctx *gin.Context) {
 
 	limit, err := strconv.Atoi(limitStr)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: "error in limit",
 		})
 		return
@@ -185,8 +185,8 @@ func (h Handler) GetRentalList(ctx *gin.Context) {
 		Search: searchStr,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: "error in ---> h.grpcClients.Rental.GetRentalList",
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
+			Error: "error in ---> GetRentalList",
 		})
 		return
 	}
@@ -216,30 +216,52 @@ func (h Handler) UpdateRental(ctx *gin.Context) {
 		return
 	}
 
-	rental, err := h.grpcClients.Rental.UpdateRental(ctx.Request.Context(), &rental.UpdateRentalRequest{
-		Id: body.RentalId,
-		Name:         body.Name,
-		Country:      body.Country,
-		Manufacturer: body.Manufacturer,
-		AboutRental:   body.AboutRental,
+	car, err := h.grpcClients.Car.GetCarByID(ctx.Request.Context(), &car.GetCarByIDRequest{
+		Id: body.CarId,
 	})
 	if err != nil {
+		ctx.JSON(http.StatusNotFound, models.JSONErrorResponse{
+			Error: "Car not found to create rental",
+		})
+		return
+	}
+
+	customer, err := h.grpcClients.Auth.GetUserByID(ctx.Request.Context(), &authorization.GetUserByIDRequest{
+		Id: body.CustomerId,
+	})
+	if err != nil {
+		ctx.JSON(http.StatusUnauthorized, models.JSONErrorResponse{
+			Error: "User is not registired to rental car",
+		})
+		return
+	}
+
+	updated, err := h.grpcClients.Rental.UpdateRental(ctx.Request.Context(), &rental.UpdateRentalRequest{
+		RentalId:   body.RentalId,
+		CarId:      car.CarId,
+		CustomerId: customer.Id,
+		StartDate:  body.StartDate,
+		EndDate:    body.EndDate,
+		Payment:    body.Payment,
+	})
+
+	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: "error in updating",
+			Error: "Faild update!",
 		})
 		return
 	}
 
 	ctx.JSON(http.StatusOK, models.JSONResponse{
 		Message: "Rental successfully updated",
-		Data:    rental,
+		Data:    updated,
 	})
 }
 
 // * ==================== DeleteRental ====================
 // DeleteRental godoc
-// @Summary     Delete rental
-// @Description delete rental
+// @Summary     delete rental by id
+// @Description delete rental by id
 // @Tags        rentals
 // @Accept      json
 // @Param       id            path   string true  "Rental ID"
@@ -251,18 +273,18 @@ func (h Handler) UpdateRental(ctx *gin.Context) {
 func (h Handler) DeleteRental(ctx *gin.Context) {
 	idStr := ctx.Param("id")
 
-	rental, err := h.grpcClients.Rental.DeleteRental(ctx.Request.Context(), &rental.DeleteRentalRequest{
+	deleted, err := h.grpcClients.Rental.DeleteRental(ctx.Request.Context(), &rental.DeleteRentalRequest{
 		RentalId: idStr,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusNotFound, models.JSONErrorResponse{
 			Error: "Rental have been already deleted!",
 		})
 		return
 	}
 
-	ctx.JSON(http.StatusNotFound, models.JSONResponse{
+	ctx.JSON(http.StatusOK, models.JSONResponse{
 		Message: "Rental suucessfully deleted",
-		Data:    rental,
+		Data:    deleted,
 	})
 }
