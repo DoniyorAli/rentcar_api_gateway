@@ -627,6 +627,292 @@
                     }
                 }
             }
+        },
+        "/v1/rental": {
+            "get": {
+                "description": "get rentals",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rentals"
+                ],
+                "summary": "List rentals",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "0",
+                        "name": "offset",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "10",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "search",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/models.Rental"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a new rental",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rentals"
+                ],
+                "summary": "Update rental",
+                "parameters": [
+                    {
+                        "description": "updating rental",
+                        "name": "rental",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateRentalModel"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Rental"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new rental",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rentals"
+                ],
+                "summary": "Create rental",
+                "parameters": [
+                    {
+                        "description": "rental body",
+                        "name": "rental",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CreateRentalModel"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Rental"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/rental/{id}": {
+            "get": {
+                "description": "get a rental by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rentals"
+                ],
+                "summary": "get rental by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Rental ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.PackedRentalModel"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete rental by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rentals"
+                ],
+                "summary": "delete rental by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Rental ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authorization",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/models.JSONResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/models.Rental"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.JSONErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -778,6 +1064,37 @@
                 }
             }
         },
+        "models.CreateRentalModel": {
+            "type": "object",
+            "required": [
+                "car_id",
+                "customer_id",
+                "end_date",
+                "payment",
+                "rental_id",
+                "start_date"
+            ],
+            "properties": {
+                "car_id": {
+                    "type": "string"
+                },
+                "customer_id": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "payment": {
+                    "type": "string"
+                },
+                "rental_id": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                }
+            }
+        },
         "models.JSONErrorResponse": {
             "type": "object",
             "properties": {
@@ -857,6 +1174,78 @@
                 }
             }
         },
+        "models.PackedRentalModel": {
+            "type": "object",
+            "required": [
+                "end_date",
+                "payment",
+                "rental_id",
+                "start_date"
+            ],
+            "properties": {
+                "car": {
+                    "$ref": "#/definitions/models.Car"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "payment": {
+                    "type": "string"
+                },
+                "rental_id": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/models.User"
+                }
+            }
+        },
+        "models.Rental": {
+            "type": "object",
+            "required": [
+                "car_id",
+                "customer_id",
+                "end_date",
+                "payment",
+                "rental_id",
+                "start_date"
+            ],
+            "properties": {
+                "car_id": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "customer_id": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "payment": {
+                    "type": "string"
+                },
+                "rental_id": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
         "models.TokenResponse": {
             "type": "object",
             "properties": {
@@ -933,6 +1322,82 @@
                 "year": {
                     "type": "string",
                     "example": "2020"
+                }
+            }
+        },
+        "models.UpdateRentalModel": {
+            "type": "object",
+            "required": [
+                "car_id",
+                "customer_id",
+                "end_date",
+                "payment",
+                "rental_id",
+                "start_date"
+            ],
+            "properties": {
+                "car_id": {
+                    "type": "string"
+                },
+                "customer_id": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "payment": {
+                    "type": "string"
+                },
+                "rental_id": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.User": {
+            "type": "object",
+            "required": [
+                "address",
+                "fname",
+                "id",
+                "lname",
+                "password",
+                "phone",
+                "user_type",
+                "username"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "fname": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lname": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_type": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
                 }
             }
         }

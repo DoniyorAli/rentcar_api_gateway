@@ -109,6 +109,28 @@ definitions:
     required:
     - model
     type: object
+  models.CreateRentalModel:
+    properties:
+      car_id:
+        type: string
+      customer_id:
+        type: string
+      end_date:
+        type: string
+      payment:
+        type: string
+      rental_id:
+        type: string
+      start_date:
+        type: string
+    required:
+    - car_id
+    - customer_id
+    - end_date
+    - payment
+    - rental_id
+    - start_date
+    type: object
   models.JSONErrorResponse:
     properties:
       error:
@@ -162,6 +184,56 @@ definitions:
         type: string
     required:
     - fullname
+    type: object
+  models.PackedRentalModel:
+    properties:
+      car:
+        $ref: '#/definitions/models.Car'
+      created_at:
+        type: string
+      end_date:
+        type: string
+      payment:
+        type: string
+      rental_id:
+        type: string
+      start_date:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+    required:
+    - end_date
+    - payment
+    - rental_id
+    - start_date
+    type: object
+  models.Rental:
+    properties:
+      car_id:
+        type: string
+      created_at:
+        type: string
+      customer_id:
+        type: string
+      end_date:
+        type: string
+      payment:
+        type: string
+      rental_id:
+        type: string
+      start_date:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - car_id
+    - customer_id
+    - end_date
+    - payment
+    - rental_id
+    - start_date
     type: object
   models.TokenResponse:
     properties:
@@ -220,6 +292,60 @@ definitions:
         type: string
     required:
     - model
+    type: object
+  models.UpdateRentalModel:
+    properties:
+      car_id:
+        type: string
+      customer_id:
+        type: string
+      end_date:
+        type: string
+      payment:
+        type: string
+      rental_id:
+        type: string
+      start_date:
+        type: string
+    required:
+    - car_id
+    - customer_id
+    - end_date
+    - payment
+    - rental_id
+    - start_date
+    type: object
+  models.User:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      fname:
+        type: string
+      id:
+        type: string
+      lname:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      updated_at:
+        type: string
+      user_type:
+        type: string
+      username:
+        type: string
+    required:
+    - address
+    - fname
+    - id
+    - lname
+    - password
+    - phone
+    - user_type
+    - username
     type: object
 info:
   contact: {}
@@ -603,4 +729,178 @@ paths:
       summary: Login
       tags:
       - authorization (login)
+  /v1/rental:
+    get:
+      consumes:
+      - application/json
+      description: get rentals
+      parameters:
+      - description: "0"
+        in: query
+        name: offset
+        type: integer
+      - description: "10"
+        in: query
+        name: limit
+        type: integer
+      - description: search
+        in: query
+        name: search
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.Rental'
+                  type: array
+              type: object
+      summary: List rentals
+      tags:
+      - rentals
+    post:
+      consumes:
+      - application/json
+      description: Create a new rental
+      parameters:
+      - description: rental body
+        in: body
+        name: rental
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateRentalModel'
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Rental'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Create rental
+      tags:
+      - rentals
+    put:
+      consumes:
+      - application/json
+      description: Update a new rental
+      parameters:
+      - description: updating rental
+        in: body
+        name: rental
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateRentalModel'
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Rental'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: Update rental
+      tags:
+      - rentals
+  /v1/rental/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete rental by id
+      parameters:
+      - description: Rental ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.Rental'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: delete rental by id
+      tags:
+      - rentals
+    get:
+      consumes:
+      - application/json
+      description: get a rental by id
+      parameters:
+      - description: Rental ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Authorization
+        in: header
+        name: Authorization
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/models.JSONResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/models.PackedRentalModel'
+              type: object
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.JSONErrorResponse'
+      summary: get rental by id
+      tags:
+      - rentals
 swagger: "2.0"
