@@ -71,7 +71,7 @@ func (h *Handler) GetBrandById(ctx *gin.Context) {
 		BrandId: idStr,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: "This is not working ---> GetBrandByID",
 		})
 		return
@@ -104,7 +104,7 @@ func (h *Handler) GetBrandList(ctx *gin.Context) {
 
 	offset, err := strconv.Atoi(offsetStr)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: "error in offset",
 		})
 		return
@@ -112,7 +112,7 @@ func (h *Handler) GetBrandList(ctx *gin.Context) {
 
 	limit, err := strconv.Atoi(limitStr)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: "error in limit",
 		})
 		return
@@ -124,8 +124,8 @@ func (h *Handler) GetBrandList(ctx *gin.Context) {
 		Search: searchStr,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: "error in ---> h.grpcClients.Brand.GetBrandList",
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
+			Error: "error in ---> GetBrandList",
 		})
 		return
 	}
@@ -155,7 +155,7 @@ func (h *Handler) UpdateBrand(ctx *gin.Context) {
 		return
 	}
 
-	brand, err := h.grpcClients.Brand.UpdateBrand(ctx.Request.Context(), &brand.UpdateBrandRequest{
+	updated, err := h.grpcClients.Brand.UpdateBrand(ctx.Request.Context(), &brand.UpdateBrandRequest{
 		Id: body.BrandId,
 		Name:         body.Name,
 		Country:      body.Country,
@@ -171,7 +171,7 @@ func (h *Handler) UpdateBrand(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, models.JSONResponse{
 		Message: "Brand successfully updated",
-		Data:    brand,
+		Data:    updated,
 	})
 }
 
@@ -194,13 +194,13 @@ func (h *Handler) DeleteBrand(ctx *gin.Context) {
 		BrandId: idStr,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusNotFound, models.JSONErrorResponse{
 			Error: "Brand have been already deleted!",
 		})
 		return
 	}
 
-	ctx.JSON(http.StatusNotFound, models.JSONResponse{
+	ctx.JSON(http.StatusOK, models.JSONResponse{
 		Message: "Brand suucessfully deleted",
 		Data:    brand,
 	})
