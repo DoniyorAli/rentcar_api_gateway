@@ -11,11 +11,11 @@ import (
 )
 
 type GrpcClients struct {
-	Car   car.CarServiceClient
-	Brand brand.BrandServiceClient
-	Auth  authorization.AuthServiceClient
-	Rental        rental.RentalServiceClient
-	conns []*grpc.ClientConn
+	Car    car.CarServiceClient
+	Brand  brand.BrandServiceClient
+	Auth   authorization.AuthServiceClient
+	Rental rental.RentalServiceClient
+	conns  []*grpc.ClientConn
 }
 
 func NewGrpcClients(cfg config.Config) (*GrpcClients, error) {
@@ -45,11 +45,11 @@ func NewGrpcClients(cfg config.Config) (*GrpcClients, error) {
 
 	conns := make([]*grpc.ClientConn, 0)
 	return &GrpcClients{
-		Car:   car,
-		Brand: brand,//! nega brand qoshilmagan appendda
-		Auth:  auth,
+		Car:    car,
+		Brand:  brand, //! nega brand qoshilmagan appendda
+		Auth:   auth,
 		Rental: rental,
-		conns: append(conns, connectCar, connectBrand, connectAuth, connRental),
+		conns:  append(conns, connectCar, connectBrand, connectAuth, connRental),
 	}, nil
 }
 
