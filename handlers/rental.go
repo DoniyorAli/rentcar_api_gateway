@@ -19,8 +19,8 @@ import (
 // @Tags        rentals
 // @Accept      json
 // @Produce     json
-// @Param       rental         body     models.CreateRentalModel true  "rental body"
-// @Param       Authorization header   string                  false "Authorization"
+// @Param       rental        body     models.CreateRentalModel true  "rental body"
+// @Param       Authorization header   string                   false "Authorization"
 // @Success     201           {object} models.JSONResponse{data=models.Rental}
 // @Failure     400           {object} models.JSONErrorResponse
 // @Router      /v1/rental [post]
@@ -203,8 +203,8 @@ func (h Handler) GetRentalList(ctx *gin.Context) {
 // @Description Update a new rental
 // @Tags        rentals
 // @Accept      json
-// @Param       rental         body   models.UpdateRentalModel true  "updating rental"
-// @Param       Authorization header string                  false "Authorization"
+// @Param       rental        body   models.UpdateRentalModel true  "updating rental"
+// @Param       Authorization header string                   false "Authorization"
 // @Produce     json
 // @Success     200 {object} models.JSONResponse{data=models.Rental}
 // @Failure     400 {object} models.JSONErrorResponse
