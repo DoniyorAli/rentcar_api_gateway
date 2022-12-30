@@ -15,10 +15,9 @@ func (h Handler) AuthMiddleware(userType string) gin.HandlerFunc {
 		hasAccesResponse, err := h.grpcClients.Auth.HasAccess(ctx.Request.Context(), &authorization.TokenRequest{
 			Token: token,
 		})
-
 		if err != nil {
-			ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-				Error: err.Error(),
+			ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
+				Error: "error in ---> HasAccess",
 			})
 			ctx.Abort()
 			return
@@ -38,7 +37,7 @@ func (h Handler) AuthMiddleware(userType string) gin.HandlerFunc {
 		}
 
 		ctx.Set("auth_username", hasAccesResponse.User.Username)
-		ctx.Set("auth_username", hasAccesResponse.User.Id)
+		ctx.Set("auth_user_id", hasAccesResponse.User.Id)
 
 		ctx.Next()
 	}
@@ -69,7 +68,7 @@ func (h *Handler) Login(ctx *gin.Context) {
 		Password: body.Password,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: err.Error(),
 		})
 		return
