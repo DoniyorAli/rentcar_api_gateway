@@ -49,7 +49,7 @@ func (h *Handler) CreateCar(ctx *gin.Context) {
 		Id: obj.CarId,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: "error in ---> GetAuthorByID",
 		})
 		return
@@ -82,7 +82,7 @@ func (h *Handler) GetCarById(ctx *gin.Context) {
 		Id: idStr,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: "error in ---> GetCarById",
 		})
 		return
@@ -134,7 +134,7 @@ func (h *Handler) GetCarList(ctx *gin.Context) {
 		Search: searchStr,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
 			Error: "error in ---> GetCarList",
 		})
 		return
@@ -178,7 +178,7 @@ func (h *Handler) UpdateCar(ctx *gin.Context) {
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: err.Error(),
+			Error: "error in ---> UpdateCar",
 		})
 		return
 	}
@@ -208,13 +208,13 @@ func (h *Handler) DeleteCar(ctx *gin.Context) {
 		Id: idStr,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusNotFound, models.JSONErrorResponse{
 			Error: "error in DeleteCar ---> GetCarByID",
 		})
 		return
 	}
 
-	ctx.JSON(http.StatusNotFound, models.JSONResponse{
+	ctx.JSON(http.StatusOK, models.JSONResponse{
 		Message: "Car successfully deleted",
 		Data:    car,
 	})
