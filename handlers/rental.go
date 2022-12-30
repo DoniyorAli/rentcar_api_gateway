@@ -35,7 +35,7 @@ func (h Handler) CreateRental(ctx *gin.Context) {
 		Id: body.CarId,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
+		ctx.JSON(http.StatusNotFound, models.JSONErrorResponse{
 			Error: "Car not found to create rental",
 		})
 		return
@@ -95,7 +95,7 @@ func (h Handler) GetRentalByID(ctx *gin.Context) {
 	})
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
-			Error: "This is not working ---> GetRentalByID",
+			Error: "error in ---> GetRentalByID",
 		})
 		return
 	}
@@ -247,7 +247,7 @@ func (h Handler) UpdateRental(ctx *gin.Context) {
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, models.JSONErrorResponse{
-			Error: "Faild update!",
+			Error: "error in ---> UpdateRental",
 		})
 		return
 	}
