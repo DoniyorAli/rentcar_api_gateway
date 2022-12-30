@@ -14,7 +14,7 @@ type Config struct {
 	AppVersion  string
 	Environment string // devlopment, staging, production
 
-	HTTPPort    string
+	HTTPPort string
 
 	GRPCPort string
 
@@ -33,11 +33,11 @@ type Config struct {
 	AuthorizationServiceGrpcHost string
 	AuthorizationServiceGrpcPort string
 
-	// PostgresHost     string
-	// PostgresPort     int
-	// PostgresDatabase string
-	// PostgresUser     string
-	// PostgresPassword string
+	PostgresHost     string
+	PostgresPort     int
+	PostgresDatabase string
+	PostgresUser     string
+	PostgresPassword string
 }
 
 // Load ...
@@ -67,14 +67,14 @@ func Load() Config {
 	config.AuthorizationServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("AUTHORIZATION_SERVICE_GRPC_HOST", "localhost"))
 	config.AuthorizationServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("AUTHORIZATION_SERVICE_GRPC_PORT", ":6002"))
 
-	// config.RentalServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("RENTAL_SERVICE_GRPC_HOST", "localhost"))
-	// config.RentalServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("RENTAL_SERVICE_GRPC_PORT", ":6003"))
+	config.RentalServiceGrpcHost = cast.ToString(getOrReturnDefaultValue("RENTAL_SERVICE_GRPC_HOST", "localhost"))
+	config.RentalServiceGrpcPort = cast.ToString(getOrReturnDefaultValue("RENTAL_SERVICE_GRPC_PORT", ":6003"))
 
-	// config.PostgresHost = cast.ToString(getOrReturnDefaultValue("POSTGRES_HOST", "127.0.0.1"))
-	// config.PostgresPort = cast.ToInt(getOrReturnDefaultValue("POSTGRES_PORT", 5432))
-	// config.PostgresDatabase = cast.ToString(getOrReturnDefaultValue("POSTGRES_DATABASE", "rental_db"))
-	// config.PostgresUser = cast.ToString(getOrReturnDefaultValue("POSTGRES_USER", "rental_db_user"))
-	// config.PostgresPassword = cast.ToString(getOrReturnDefaultValue("POSTGRES_PASSWORD", "rental_db_password"))
+	config.PostgresHost = cast.ToString(getOrReturnDefaultValue("POSTGRES_HOST", "127.0.0.1"))
+	config.PostgresPort = cast.ToInt(getOrReturnDefaultValue("POSTGRES_PORT", 5432))
+	config.PostgresDatabase = cast.ToString(getOrReturnDefaultValue("POSTGRES_DATABASE", "rental_db"))
+	config.PostgresUser = cast.ToString(getOrReturnDefaultValue("POSTGRES_USER", "rental_db_user"))
+	config.PostgresPassword = cast.ToString(getOrReturnDefaultValue("POSTGRES_PASSWORD", "rental_db_password"))
 
 	return config
 }
