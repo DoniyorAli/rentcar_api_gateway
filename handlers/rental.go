@@ -186,7 +186,7 @@ func (h Handler) GetRentalList(ctx *gin.Context) {
 	})
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
-			Error: "error in ---> GetRentalList",
+			Error: err.Error(),
 		})
 		return
 	}
