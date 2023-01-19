@@ -3,6 +3,7 @@ package handlers
 import (
 	"MyProjects/RentCar_gRPC/rentcar_api_gateway/models"
 	"MyProjects/RentCar_gRPC/rentcar_api_gateway/protogen/authorization"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,12 +13,14 @@ import (
 func (h Handler) AuthMiddleware(userType string) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		token := ctx.GetHeader("Authorization")
+		fmt.Println(token)
 		hasAccesResponse, err := h.grpcClients.Auth.HasAccess(ctx.Request.Context(), &authorization.TokenRequest{
 			Token: token,
 		})
+		fmt.Println(hasAccesResponse)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, models.JSONErrorResponse{
-				Error: "error in ---> HasAccess",
+				Error:err.Error(),
 			})
 			ctx.Abort()
 			return
